@@ -31,3 +31,4 @@ override.tf.json
 *kube_config_cluster.yml
 *azure_demo
 *azure_demo.pub
+*.rkestate

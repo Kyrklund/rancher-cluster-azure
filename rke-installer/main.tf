@@ -55,52 +55,6 @@ resource "rke_cluster" "cluster" {
     }
   }
 
-  services {
-
-    kube_api {
-      #service_cluster_ip_range = var.service_cluster_ip_range
-      #service_node_port_range  = var.service_node_port_range
-      pod_security_policy      = var.pod_security_policy
-      secrets_encryption_config {
-        enabled = true
-      }
-      always_pull_images = var.always_pull_images
-      audit_log {
-        enabled = true
-        configuration {
-          max_age    = 7
-          max_backup = 7
-          max_size   = 128
-          policy     = jsonencode({"apiVersion":"audit.k8s.io/v1","kind":"Policy","rules":[{"level":"Metadata"}]})
-        }
-      }    
-    }
-
-    kube_controller {
-      cluster_cidr             = var.cluster_cidr
-      service_cluster_ip_range = var.service_cluster_ip_range
-    }
-
-    kubelet {
-      cluster_domain     = var.cluster_domain
-      #cluster_dns_server = var.cluster_dns_server
-      fail_swap_on       = false
-    }
-  }
-
-  addon_job_timeout = 60
-
-  network {
-    plugin = "canal"
-  }
-
-  authentication {
-    strategy = "x509"
-  }
-  authorization {
-    mode = "rbac"
-  }
-
   lifecycle {
     ignore_changes = [
       cluster_cidr,

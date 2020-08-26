@@ -18,3 +18,9 @@ terraform {
     }
   }
 }
+
+provider "azurerm" {
+    tenant_id  = "481cb5c3-c38b-45ce-976a-32cfaad9c160"
+    subscription_id = "d5c795f5-43fc-4e6e-b8e9-658bbbd864da"
+    features {}
+}
