@@ -27,13 +27,11 @@ provider "rancher2" {
 
 #Setting up providers with credentials to Kubernetes
 provider "kubernetes" {
-  host        = var.server_url
   config_path = "kube_config_cluster.yml"
 }
 
 provider "helm" {
   kubernetes {
-    host        = var.server_url
     config_path = "kube_config_cluster.yml"
   }
 }

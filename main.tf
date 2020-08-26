@@ -12,9 +12,9 @@ module "rke-install" {
     ssh_key = module.ranchervms.ssh_key
 }
 
-##Install Rancher on Kubernetes
-#module "rancher-install" {
-#    kubeconfig = module.rke-install.kubeconfig
-#    source     = "./rancher-installer"
-#    server_url = module.rke-install.server_url
-#}
+#Install Rancher on Kubernetes
+module "rancher-install" {
+    kubeconfig = module.rke-install.kubeconfig
+    source     = "./rancher-installer"
+    server_url = module.rke-install.server_url
+}
