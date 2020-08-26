@@ -1,3 +1,12 @@
+terraform {
+  required_version = ">= 0.13"
+  required_providers {
+    rke = {
+      source = "rancher/rke"
+    }
+  }
+}
+
 ###################################
 # The ssh socket is not ready when RKE tries to connect.
 # RKE only does one try before failing...

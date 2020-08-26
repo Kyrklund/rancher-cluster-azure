@@ -1,18 +1,13 @@
-#Setting up providers with credentials to Kubernetes
-provider "kubernetes" {
-  host = var.server_url
-  config_path = "${path.root}/kube_config_cluster.yml"
-}
-
-provider "helm" {
-  kubernetes {
-    host = var.server_url
-      config_path = "${path.root}/kube_config_cluster.yml"
+terraform {
+  required_version = ">= 0.13"
+  required_providers {
+    rancher2 = {
+      source = "rancher/rancher2"
+    }
   }
 }
 
 #Install Cert-manager with Helm (Pre-req. by Rancher)
-
 resource "kubernetes_namespace" "cert-manager-ns" {
   metadata {
     name = "cert-manager"
@@ -94,30 +89,6 @@ resource "null_resource" "wait_for_url" {
       done
    EOT
   }
-}
-
-
-#---------------------
-# Bootstraping Rancher
-#---------------------
-
-# Rancher resources
-# Rancher2 bootstrapping provider
-provider "rancher2" {
-  alias = "bootstrap"
-
-  api_url  = "https://rancher-meetup.tworm.com"
-  insecure = true
-  bootstrap = true
-}
-
-# Rancher2 administration provider
-provider "rancher2" {
-  alias = "admin"
-
-  api_url  = "https://rancher-meetup.tworm.com"
-  insecure = true
-  token_key = rancher2_bootstrap.admin.token
 }
 
 # Initialize Rancher server
