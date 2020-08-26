@@ -20,7 +20,7 @@ module "rke-install" {
 
 #Install Rancher on Kubernetes
 module "rancher-install" {
-    depends_on = [module.rke-install]
+    kubeconfig = module.rke-install.kubeconfig
     source     = "./rancher-installer"
     server_url = module.rke-install.server_url
 }

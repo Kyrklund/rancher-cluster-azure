@@ -1,11 +1,11 @@
-terraform {
-  required_version = ">= 0.13"
-  required_providers {
-    rancher2 = {
-      source = "rancher/rancher2"
-    }
-  }
-}
+#terraform {
+#  required_version = ">= 0.13"
+#  required_providers {
+#    rancher2 = {
+#      source = "rancher/rancher2"
+#    }
+#  }
+#}
 
 #Install Cert-manager with Helm (Pre-req. by Rancher)
 resource "kubernetes_namespace" "cert-manager-ns" {
